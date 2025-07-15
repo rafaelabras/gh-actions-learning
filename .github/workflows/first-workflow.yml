@@ -1,5 +1,10 @@
 name: first_workflow
-on: workflow_dispatch # Wait for the user manually trigger (start) the workflow. "Espera o usuário executar manualmente o workflow."
+on:
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch:
+    
 jobs:
   lint:
     runs-on: ubuntu-latest
