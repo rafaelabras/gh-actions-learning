@@ -1,10 +1,26 @@
 name: first_workflow
 on: workflow_dispatch # Wait for the user manually trigger (start) the workflow. "Espera o usuário executar manualmente o workflow."
 jobs:
-  first-job:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Print greeting
-        run: echo "$pwd my first workflow!"
-      - name: Print goodbye
-        run: echo "$SHELL goodbye workflow!"
+      - name: Get Code
+        uses: actions/checkout
+      - name: Run Lint
+        run: npm lint
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Test
+        run: npm test
+      - name: Run message
+        run: echo "Testing..."
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - name: Build Projecy
+        run: npm build
+      - name: Run message
+        run: echo "Building Projecto..."
