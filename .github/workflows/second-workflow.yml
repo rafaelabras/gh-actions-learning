@@ -1,15 +1,8 @@
 name: second_workflow
-on:
-    issues:
-        types: [assigned, opened, closed]
+on: issues
 jobs:
     output:
         runs-on: ubuntu-latest
         steps:
           - name: Output Event
-            run: echo "${{ toJSON(github) }}" 
-    issues:
-        runs-on: ubuntu-latest
-        steps:
-           - name: Issues Event
-             run: echo "${{ toJSON(github.action) }}"
+            run: echo "${{ toJSON(github.event) }}" 
