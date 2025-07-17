@@ -75,3 +75,9 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying..."
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Information
+        run: echo "Jus be y self lil bro ${{ github }}"
+
